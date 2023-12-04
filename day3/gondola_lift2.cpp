@@ -1,26 +1,12 @@
 #include <iostream>
 #include <sstream>
-#include<vector>
+#include <vector>
 #include <iterator>
 #include <algorithm>
 #include <fstream>
 
 using namespace std;
 using Coord = pair<int, int>;
-
-auto extractParts(const vector<string> &m) {
-  vector<Coord> res;
-  for (int i=0; const auto &s : m) {
-    for (int j=0; const auto &c : s) {
-      if (isdigit(c)) {
-        res.emplace_back(make_pair(i, j));
-      }
-      j++;
-    }
-    i++;
-  }
-  return res;
-}
 
 auto extractAsterisks(const vector<string> &m) {
   vector<Coord> res;
