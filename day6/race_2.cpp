@@ -4,9 +4,6 @@
 #include <vector>
 #include <algorithm>
 #include <regex>
-#include <map>
-#include <execution>
-#include <ranges>
 
 using namespace std;
 using Race = pair<long, long>;
