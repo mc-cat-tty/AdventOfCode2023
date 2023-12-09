@@ -31,7 +31,6 @@ auto steps(const string &start, const string &instr, const map<string, Fork> &m)
   return res;
 }
 
-// 13334102464297
 auto totalSteps(const string &instr, const map<string, Fork> &m) {
   auto startingPoints = m
     | views::keys
