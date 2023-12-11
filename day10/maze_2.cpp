@@ -34,10 +34,10 @@ auto findNext(vector<string> m, long pr, long pc, long r, long c) {
   switch (ch) {
   case '|': if (r==pr+1 and c==pc) return make_pair(pr+2, pc); else return make_pair(pr-2, pc);
   case '-': if (r==pr and c==pc+1) return make_pair(pr, pc+2); else return make_pair(pr, pc-2);
-  case 'L': if (r==pr+1 and c==pc) return make_pair(pr+1, pc+1); else return make_pair(pr-1L, pc-1L);
-  case 'J': if (r==pr+1 and c==pc) return make_pair(pr+1, pc-1L); else return make_pair(pr-1L, pc+1);
-  case '7': if (r==pr and c==pc+1) return make_pair(pr+1, pc+1); else return make_pair(pr-1L, pc-1L);
-  case 'F': if (r==pr and c==pc-1L) return make_pair(pr+1, pc-1L); else return make_pair(pr-1L, pc+1);
+  case 'L': if (r==pr+1 and c==pc) return make_pair(pr+1, pc+1); else return make_pair(pr-1, pc-1);
+  case 'J': if (r==pr+1 and c==pc) return make_pair(pr+1, pc-1); else return make_pair(pr-1, pc+1);
+  case '7': if (r==pr and c==pc+1) return make_pair(pr+1, pc+1); else return make_pair(pr-1, pc-1);
+  case 'F': if (r==pr and c==pc-1) return make_pair(pr+1, pc-1); else return make_pair(pr-1, pc+1);
   }
 
   return make_pair(-1L, -1L);
@@ -45,22 +45,22 @@ auto findNext(vector<string> m, long pr, long pc, long r, long c) {
 
 auto findNearestValid(vector<string> m, long i, long j) {
   if (m[i][j+1] == '-') return make_pair(i, ++j);
-  if (m[i][j-1L] == '-') return make_pair(i, --j);
+  if (m[i][j-1] == '-') return make_pair(i, --j);
 
   if (m[i+1][j] == '|') return make_pair(++i, j);
-  if (m[i-1L][j] == '|') return make_pair(--i, j);
+  if (m[i-1][j] == '|') return make_pair(--i, j);
   
   if (m[i+1][j] == 'L') return make_pair(++i, j);
-  if (m[i][j-1L] == 'L') return make_pair(i, --j);
+  if (m[i][j-1] == 'L') return make_pair(i, --j);
   
   if (m[i+1][j] == 'J') return make_pair(++i, j);
   if (m[i][j+1] == 'J') return make_pair(i, ++j);
 
-  if (m[i-1L][j] == '7') return make_pair(--i, j);
+  if (m[i-1][j] == '7') return make_pair(--i, j);
   if (m[i][j+1] == '7') return make_pair(i, ++j);
 
-  if (m[i-1L][j] == 'F') return make_pair(--i, j);
-  if (m[i][j-1L] == 'F') return make_pair(i, --j);
+  if (m[i-1][j] == 'F') return make_pair(--i, j);
+  if (m[i][j-1] == 'F') return make_pair(i, --j);
 
   return make_pair(-1L, -1L);
 }
@@ -89,7 +89,7 @@ auto concav(char c) {
   return 0;
 }
 
-auto farthestPolong(vector<string> m) {
+auto farthestPoint(vector<string> m) {
   auto [previ, prevj] = findStart(m);
   auto [i, j] = findNearestValid(m, previ, prevj);
   Coord start{previ, prevj};
@@ -100,7 +100,7 @@ auto farthestPolong(vector<string> m) {
 
   do {
     if (m[previ][prevj] != '-' and m[i][j] == '-') HSegs.push_back({{previ, prevj}, {-1L, -1L}});
-    else if (m[previ][prevj] == '-' and m[i][j] != '-') (*(HSegs.end()-1L)).second = {i, j};
+    else if (m[previ][prevj] == '-' and m[i][j] != '-') (*(HSegs.end()-1)).second = {i, j};
     else if (previ == i and m[i][j] != m[previ][prevj]) HSegs.push_back({{previ, prevj}, {i, j}});
 
     auto [ni, nj] = findNext(m, previ, prevj, i, j);
@@ -110,7 +110,7 @@ auto farthestPolong(vector<string> m) {
     // cout << i << " " << j << endl;
   } while (Coord{i, j} != start);
   maze.emplace_back(i, j);
-  if (m[previ][prevj] == '-' and m[i][j] != '-') (*(HSegs.end()-1L)).second = {i, j};
+  if (m[previ][prevj] == '-' and m[i][j] != '-') (*(HSegs.end()-1)).second = {i, j};
   else if (previ == i and m[i][j] != m[previ][prevj]) HSegs.push_back({{previ, prevj}, {i, j}});
 
   // for (auto s : HSegs) {
@@ -157,5 +157,5 @@ int main() {
 
   in.close();
 
-  cout << farthestPolong(m) << endl;
+  cout << farthestPoint(m) << endl;
 }
