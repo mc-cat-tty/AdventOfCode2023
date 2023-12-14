@@ -22,7 +22,7 @@ auto steps(const string &instr, const map<string, Fork> &m) {
         case 'L': next = m.at(next).first; break;
       }
 
-      if (*(next.end()-1) == 'Z') break;
+      if (next.back() == 'Z') break;
     }
   }
 

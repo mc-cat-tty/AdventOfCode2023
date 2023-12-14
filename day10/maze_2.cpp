@@ -100,7 +100,7 @@ auto farthestPoint(vector<string> m) {
 
   do {
     if (m[previ][prevj] != '-' and m[i][j] == '-') HSegs.push_back({{previ, prevj}, {-1L, -1L}});
-    else if (m[previ][prevj] == '-' and m[i][j] != '-') (*(HSegs.end()-1)).second = {i, j};
+    else if (m[previ][prevj] == '-' and m[i][j] != '-') (HSegs.back()).second = {i, j};
     else if (previ == i and m[i][j] != m[previ][prevj]) HSegs.push_back({{previ, prevj}, {i, j}});
 
     auto [ni, nj] = findNext(m, previ, prevj, i, j);
@@ -110,7 +110,7 @@ auto farthestPoint(vector<string> m) {
     // cout << i << " " << j << endl;
   } while (Coord{i, j} != start);
   maze.emplace_back(i, j);
-  if (m[previ][prevj] == '-' and m[i][j] != '-') (*(HSegs.end()-1)).second = {i, j};
+  if (m[previ][prevj] == '-' and m[i][j] != '-') (HSegs.back()).second = {i, j};
   else if (previ == i and m[i][j] != m[previ][prevj]) HSegs.push_back({{previ, prevj}, {i, j}});
 
   // for (auto s : HSegs) {

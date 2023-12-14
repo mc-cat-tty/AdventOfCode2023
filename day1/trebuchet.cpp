@@ -20,7 +20,7 @@ std::map<std::string, std::string> translate = {
 int extractCalibrationValue(std::string input) {
     std::erase_if(input, [](char c){return !std::isdigit(c);});
     return stoi(
-        std::string{*input.begin(), *(input.end()-1)}
+        std::string{input.front(), input.back()}
     );
 }
 

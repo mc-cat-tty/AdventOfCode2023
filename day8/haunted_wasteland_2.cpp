@@ -15,7 +15,7 @@ auto steps(const string &start, const string &instr, const map<string, Fork> &m)
   long res = 0;
   string next = start;
 
-  while (*(next.end()-1) != 'Z') {
+  while (next.back() != 'Z') {
     for (const auto &i : instr) {
       res++;
 
@@ -24,7 +24,7 @@ auto steps(const string &start, const string &instr, const map<string, Fork> &m)
         case 'L': next = m.at(next).first; break;
       }
 
-      if (*(next.end()-1) == 'Z') break;
+      if (next.back() == 'Z') break;
     }
   }
 
@@ -34,7 +34,7 @@ auto steps(const string &start, const string &instr, const map<string, Fork> &m)
 auto totalSteps(const string &instr, const map<string, Fork> &m) {
   auto startingPoints = m
     | views::keys
-    | views::filter([](auto e){ return *(e.end()-1) == 'A'; });
+    | views::filter([](auto e){ return e.back() == 'A'; });
 
   vector<long> res;
   for (const auto &s : startingPoints) {

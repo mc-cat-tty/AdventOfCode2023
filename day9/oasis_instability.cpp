@@ -21,7 +21,7 @@ auto prediction(const Timeseries &v) {
     if (allZero and diff != 0) allZero = false;
   }
 
-  return *(v.end()-1) + (allZero ? 0 : prediction(t));
+  return v.back() + (allZero ? 0 : prediction(t));
 }
 
 auto sumPrediction(const vector<Timeseries> &v) {
