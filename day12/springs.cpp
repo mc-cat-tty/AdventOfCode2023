@@ -10,7 +10,6 @@
 
 using namespace std;
 
-using namespace std;
 struct Line {
   string row;
   vector<int> dmg;  // damaged vector

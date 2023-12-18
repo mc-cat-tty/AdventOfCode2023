@@ -11,7 +11,6 @@
 
 using namespace std;
 
-using namespace std;
 using Cache = map<string, long>;
 struct Line {
   string row;
