@@ -24,7 +24,7 @@ auto symmetry(Block b) {
   return 0;
 }
 
-auto reverse(const Block b) {
+auto reverse(const Block &b) {
   Block res;
   for (int i=0; i<b.at(0).size(); i++) {
     string tmp;
